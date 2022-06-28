@@ -4,6 +4,8 @@
 
 - [Reactjs](https://pt-br.reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Styled-components](https://styled-components.com/)
+- [Miragejs](https://miragejs.com/)
 
 ## ✋🏻 Pré-requisitos
 
