@@ -4,6 +4,7 @@ import { Header } from "./components/Header";
 import { TransactionsTable } from "./components/TransactionsTable";
 import Modal from "react-modal";
 import { NewTransactionModal } from "./components/NewTransactionModal";
+import { TrasactionProvider } from "./contexts/TransactionsProvider";
 
 Modal.setAppElement("#root");
 
@@ -15,7 +16,7 @@ export const App = () => {
     setIsNewTransactionModalOpen((open) => !open);
 
   return (
-    <>
+    <TrasactionProvider>
       <Header
         toggleOpenOrCloseNewTransactionModal={
           toggleOpenOrCloseNewTransactionModal
@@ -28,7 +29,7 @@ export const App = () => {
         isOpen={isNewTransactionModalOpen}
         onRequestClose={toggleOpenOrCloseNewTransactionModal}
       />
-    </>
+    </TrasactionProvider>
   );
 };
 
