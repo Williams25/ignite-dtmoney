@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react";
-import { TransactionsSerices } from "../../services/transactions-service";
-import { Transactions } from "../../types/Transactions";
+import { useTransactions } from "../../hooks/useTransactions";
+import { formatCurrency } from "../../utils/formatCurrency";
+import { formatDate } from "../../utils/formatDate";
 import { Container } from "./styles";
 
 export const TransactionsTable = () => {
-  const [transactions, setTransactions] = useState<Transactions | null>(null);
-
-  const handleTransaction = async () => {
-    const { data } = await TransactionsSerices.getAll();
-    setTransactions(data);
-  };
-
-  useEffect(() => {
-    handleTransaction();
-  }, []);
+  const { transactions } = useTransactions();
 
   return (
     <Container>
@@ -28,22 +19,15 @@ export const TransactionsTable = () => {
         </thead>
 
         <tbody>
-          {transactions?.transactions.map((transaction) => (
+          {transactions.map((transaction) => (
             <tr key={transaction.id}>
               <td>{transaction.title}</td>
               <td className={transaction.type}>
                 {transaction.type === "withdraw" && "- "}
-                {new Intl.NumberFormat("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                }).format(transaction.amount)}
+                {formatCurrency(transaction.amount)}
               </td>
               <td>{transaction.category}</td>
-              <td>
-                {new Intl.DateTimeFormat("pt-br").format(
-                  new Date(transaction.createdAt)
-                )}
-              </td>
+              <td>{formatDate(transaction.createdAt)}</td>
             </tr>
           ))}
         </tbody>
