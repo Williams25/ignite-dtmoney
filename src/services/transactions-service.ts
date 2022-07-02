@@ -1,24 +1,12 @@
-import { Transactions } from "../types/Transactions";
+import { AxiosResponse } from "axios";
+import { CreateTransactions, Transactions } from "../types/Transactions";
+import { http } from "./axios-config";
 
 export const TransactionsSerices = {
-  getAll: (): Transactions[] => {
-    return [
-      {
-        id: 1,
-        title: "Transaction 1",
-        amount: 400,
-        type: "deposit",
-        category: "Food",
-        createdAt: new Date(),
-      },
-      {
-        id: 2,
-        title: "Transaction 2",
-        amount: 100,
-        type: "withdraw",
-        category: "Food",
-        createdAt: new Date(),
-      },
-    ];
+  getAll: (): Promise<AxiosResponse<Transactions>> => {
+    return http.get<Transactions>(`/transactions`);
+  },
+  create: (data: CreateTransactions) => {
+    return http.post("/transactions", data);
   },
 };
