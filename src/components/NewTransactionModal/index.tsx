@@ -1,10 +1,10 @@
+import { Container, RadioBox, TransactionTypeContainer } from "./styles";
+import { FormEvent, useCallback, useState } from "react";
 import Modal from "react-modal";
-import { Container, TransactionTypeContainer, RadioBox } from "./styles";
 import closeImg from "../../assets/close.svg";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
-import { FormEvent, useCallback, useState } from "react";
-import { TransactionsSerices } from "../../services/transactions-service";
+import { useTransactions } from "../../hooks/useTransactions";
 
 export type TypeTransition = "deposit" | "withdraw";
 
@@ -22,6 +22,15 @@ export const NewTransactionModal = ({
   const [category, setCategory] = useState<string>("");
   const [value, setValue] = useState<number>(0);
 
+  const { createTransaction } = useTransactions();
+
+  const clearData = () => {
+    setType(null);
+    setTitle("");
+    setCategory("");
+    setValue(0);
+  };
+
   const handleCreateNewTransaction = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -32,7 +41,9 @@ export const NewTransactionModal = ({
       value,
     };
 
-    await TransactionsSerices.create(data);
+    await createTransaction(data);
+    clearData();
+    onRequestClose();
   };
 
   const toggleSelectTypeTransition = useCallback(
