@@ -1,9 +1,13 @@
 import { Container } from "./styles";
+import { formatCurrency } from "../../utils/formatCurrency";
 import incomeImage from "../../assets/income.svg";
 import outcomeImage from "../../assets/outcome.svg";
 import totalImage from "../../assets/total.svg";
+import { useTransactions } from "../../hooks/useTransactions";
 
 export const Summary = () => {
+  const { totalDeposit, totalWithdrawals, total } = useTransactions();
+
   return (
     <Container>
       <div>
@@ -11,7 +15,7 @@ export const Summary = () => {
           <p>Entradas</p>
           <img src={incomeImage} alt="Entradas" />
         </header>
-        <strong>R$ 1000,00</strong>
+        <strong>{formatCurrency(totalDeposit)}</strong>
       </div>
 
       <div>
@@ -19,7 +23,7 @@ export const Summary = () => {
           <p>Saídas</p>
           <img src={outcomeImage} alt="Saídas" />
         </header>
-        <strong>- R$ 500,00</strong>
+        <strong>- {formatCurrency(totalWithdrawals)}</strong>
       </div>
 
       <div>
@@ -27,7 +31,7 @@ export const Summary = () => {
           <p>Total</p>
           <img src={totalImage} alt="Total" />
         </header>
-        <strong>R$ 500,00</strong>
+        <strong>{formatCurrency(total)}</strong>
       </div>
     </Container>
   );
