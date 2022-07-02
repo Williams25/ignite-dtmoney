@@ -17,22 +17,28 @@ export const Container = styled.div`
         line-height: 1.5rem;
       }
 
-      td {
-        padding: 1rem 2rem;
-        border: 0;
-        background-color: ${theme.colors.shape};
-        font-weight: 400;
-        color: ${theme.colors.text};
+      tbody {
+        tr {
+          background-color: ${theme.colors.shape};
 
-        &:first-child {
-          color: ${theme.colors.title};
-        }
+          td {
+            padding: 1rem 2rem;
+            border: 0;
 
-        &.withdraw {
-          color: ${theme.colors.red};
-        }
-        &.deposit {
-          color: ${theme.colors.green};
+            font-weight: 400;
+            color: ${theme.colors.text};
+
+            &:first-child {
+              color: ${theme.colors.title};
+            }
+
+            &.withdraw {
+              color: ${theme.colors.red};
+            }
+            &.deposit {
+              color: ${theme.colors.green};
+            }
+          }
         }
       }
     }
