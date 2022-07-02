@@ -1,14 +1,12 @@
 import { TypeTransition } from "../components/NewTransactionModal";
 
 export type Transactions = {
-  transactions: {
-    id: number;
-    title: string;
-    amount: number;
-    type: "deposit" | "withdraw";
-    category: string;
-    createdAt: Date;
-  }[];
+  id?: number;
+  title: string;
+  amount: number;
+  type: "deposit" | "withdraw";
+  category: string;
+  createdAt: Date;
 };
 
 export type CreateTransactions = {
